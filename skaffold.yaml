@@ -1,0 +1,24 @@
+apiVersion: skaffold/v2beta27
+kind: Config
+metadata:
+  name: skaffold-cra
+build:
+  artifacts:
+    - image: skaffold-cra
+      sync:
+        infer:
+          - '**/*.ts'
+          - '**/*.tsx'
+          - '**/*.js'
+          - '**/*.jsx'
+          - '**/*.css'
+      docker:
+        dockerfile: Dockerfile.dev
+deploy:
+  kubectl:
+    manifests:
+      - k8s/dev/deployment.yaml
+portForward:
+  - resourceType: deployment
+    resourceName: cra-app
+    port: 3000

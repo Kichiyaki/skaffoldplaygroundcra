@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cra-app
+spec:
+  selector:
+    matchLabels:
+      app: cra-app
+  template:
+    metadata:
+      labels:
+        app: cra-app
+    spec:
+      containers:
+        - name: cra-app
+          image: skaffold-cra
+          ports:
+            - containerPort: 3000
